@@ -2,7 +2,7 @@
 
 ![logo](/assets/images/icon_instaAI.png)
 
-It's like Instagram, but the images are created using AI.
+It's like Instagram, but the images are created using AI. The API for doing so comes from [https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0].
 
 It's a social network where users can create the images they want simply by typing a comand. 
 
