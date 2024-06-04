@@ -11,3 +11,5 @@ The users can share their creations with followers by posting the generated imag
 The followers can add a like to the images. 
 
 Furthermore, it is possible to exchange messages with other users via chat.
+
+What are you waiting for? Let's try it!
