@@ -58,7 +58,7 @@ export default function ChatScreen({ route }) {
     const sentMessage = newMessages[0];
     setMessages((prevMessages) => GiftedChat.append(prevMessages, sentMessage));
     try {
-      await addMessageToDatabase(sessionUser, otherUser, sentMessage.text);
+      addMessageToDatabase(sessionUser, otherUser, sentMessage.text);
     } catch (error) {
       console.error('Error adding message to database:', error);
     }
