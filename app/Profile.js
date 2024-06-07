@@ -27,7 +27,7 @@ const ProfileScreen = ({navigation}) => {
         fetchUserData();
     }, []);
 
-    // fetch the images from the database
+    // fetch info and images from the database
     const fetchImagesData = async () => {
         try {
             if (user) {
@@ -51,7 +51,7 @@ const ProfileScreen = ({navigation}) => {
         fetchImagesData();
     }, [user]);
 
-    // updates the images upon refresh
+    // updates info and images upon refresh
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
         fetchImagesData().finally(() => {
