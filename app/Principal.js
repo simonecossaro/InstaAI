@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
 import { Octicons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 import { getImagesForSessionUser, userLikedThisPost, addLikeToDatabase, removeLikeFromDatabase, getNumberLikes } from './database';
 import { getUsername} from './session';
 
@@ -39,6 +40,13 @@ const PrincipalScreen = () => {
     useEffect(() => {
         fetchImagesData();
     }, [sessionUser]); 
+
+    // useFocusEffect to fetch images every time the screen is focused
+    useFocusEffect(
+        useCallback(() => {
+            fetchImagesData();
+        }, [sessionUser])
+    );
 
     // updates the images upon refresh
     const onRefresh = React.useCallback(() => {
@@ -136,7 +144,7 @@ const styles = StyleSheet.create({
         paddingBottom: 12,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
-        backgroundColor: 'black' // Manteniamo solo questa dichiarazione
+        backgroundColor: 'black' 
     },    
     logo: {
         width: '40%',
