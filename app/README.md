@@ -24,7 +24,8 @@ The home screen has a tab associated with 5 screens:
 
 **Profile.js** : profile screen of the session user.
 
-
+<br>
+<br>
 
 In this directory there are also two additional files:
 
