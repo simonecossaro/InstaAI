@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity, RefreshControl } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { getUserInfo, fetchUserProfileImagesFromDatabase, getNumberFollower, getNumberFollowed, getPostNumber, getNumberLikes } from './database';
 import { getUsername, logout } from './session';
 
@@ -58,6 +59,13 @@ const ProfileScreen = ({navigation}) => {
             setRefreshing(false);
         });
     }, [user]);
+
+    // useFocusEffect to fetch images and data every time the screen is focused
+    useFocusEffect(
+        useCallback(() => {
+            fetchImagesData();
+        }, [user])
+    );
 
     const ImageItem = ({ image }) => {
         const [numberLikes, setNumberLikes] = useState(0);
