@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Ionicons, Entypo, Feather, FontAwesome } from '@expo/vector-icons';
 import ImageGenerator from './ImageGenerator';
