@@ -28,7 +28,7 @@ const SearchUserScreen = () => {
 
     // function to visit the profile
     const visitProfile = (searchedUsername) => {
-        navigation.navigate('Search Profile', { searchedUser: searchedUsername });
+        navigation.navigate('SearchProfile', { searchedUser: searchedUsername });
     };
 
     // creates the user list
@@ -73,7 +73,7 @@ const SearchUserScreen = () => {
     return (
         <View>
             <SearchBar
-                style={{ backgroundColor: 'white', borderColor: 'black', padding: 10, marginTop: 40, marginLeft: 10, marginBottom: 10 }}
+                style={styles.bar}
                 placeholder="Search users..."
                 onChangeText={handleSearch}
                 value={searchQuery}
@@ -94,6 +94,14 @@ const SearchUserScreen = () => {
 };
 
 const styles = StyleSheet.create({
+    bar: {
+        backgroundColor: 'white', 
+        borderColor: 'black', 
+        padding: 10, 
+        marginTop: 40, 
+        marginLeft: 10, 
+        marginBottom: 10
+    },
     userButton: {
         width: '100%',
         height: 40,
