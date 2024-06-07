@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, FlatList, Text, StyleSheet, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getUsersFromDatabase, getChats } from './database';
 import { getUsername } from './session';
 
@@ -77,6 +77,13 @@ const ChatSearchScreen = () => {
         };
         fetchUsers();
     }, [sessionUser]);
+
+    // useFocusEffect to fetch chats every time the screen is focused
+    useFocusEffect(
+        useCallback(() => {
+            fetchChats();
+        }, [sessionUser])
+    );
 
     // updates the chats upon refresh 
     const onRefresh = React.useCallback(() => {
