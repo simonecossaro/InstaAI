@@ -58,7 +58,7 @@ const ChatSearchScreen = () => {
             const responseChats = await getChats(sessionUser);
             setChats(responseChats);
         } catch(error) {
-            console.error('Error during use effect:', error);
+            console.error('Error during fetchChats:', error);
         }
     };
 
