@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, LogBox } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
 import { addMessageToDatabase, getMessagesUserToUser } from './database';
 import { FontAwesome } from '@expo/vector-icons';
 import { getUsername } from './session';
-
-// Disable warning regarding Avatar deprecation
-LogBox.ignoreAllLogs(true);
-console.warn = () => {};
-console.error = () => {};
 
 export default function ChatScreen({ route }) {
   const [messages, setMessages] = useState([]);
@@ -68,6 +63,7 @@ export default function ChatScreen({ route }) {
     }
   };
 
+  // function to render the chat in the correct way
   const renderBubble = (props) => {
     return (
       <Bubble
