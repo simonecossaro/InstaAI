@@ -23,7 +23,7 @@ const PrincipalScreen = () => {
         fetchSessionUser();
     }, []);
 
-    // when the session user is fetched, fetch the images
+    // fetch the images that the user should see
     const fetchImagesData = async () => {
         try {
             if (sessionUser) {
@@ -34,6 +34,8 @@ const PrincipalScreen = () => {
             console.error('Error fetching images:', error);
         }
     };
+
+    // when the session user is fetched, fetch the images
     useEffect(() => {
         fetchImagesData();
     }, [sessionUser]); 
