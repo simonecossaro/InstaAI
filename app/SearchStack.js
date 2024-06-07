@@ -12,7 +12,7 @@ export default function SearchStack() {
     }}
     >
       <Stack.Screen name="SearchBarScreen" component={SearchUserScreen} />
-      <Stack.Screen name="Search Profile" component={SearchProfileScreen} />
+      <Stack.Screen name="SearchProfile" component={SearchProfileScreen} />
     </Stack.Navigator>
   );
 };
