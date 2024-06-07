@@ -18,9 +18,9 @@ The home screen has a tab associated with 5 screens:
 
 **ImageGenerator.js** : here you can generate images via a command and if you like them you can post.
 
-**ChatStack.js** : stack composed by 2 screens:
-**ChatSearchScreen.js** : here you can search for a user and open a chat with him or you can directly open one of the chats already started;
-**ChatScreen.js** : chat with another user.
+**ChatStack.js** : stack composed by 2 screens:  
+* **ChatSearchScreen.js** : here you can search for a user and open a chat with him or you can directly open one of the chats already started;  
+* **ChatScreen.js** : chat with another user.
 
 **Profile.js** : profile screen of the session user.
 
