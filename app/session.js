@@ -24,7 +24,6 @@ export const getUsername = async () => {
 export const logout = async () => {
     try {
         await AsyncStorage.removeItem('username');
-        console.log('Logout');
     } catch (error) {
         console.error('Errore during logout:', error);
     }
