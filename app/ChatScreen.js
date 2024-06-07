@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
 import { addMessageToDatabase, getMessagesUserToUser } from './database';
@@ -8,6 +8,7 @@ import { getUsername } from './session';
 export default function ChatScreen({ route }) {
   const [messages, setMessages] = useState([]);
   const [sessionUser, setSessionUser] = useState(null); 
+  const [loading, setLoading] = useState(true);
   const { otherUser } = route.params;
 
   // fetch session user at rendering
@@ -27,17 +28,17 @@ export default function ChatScreen({ route }) {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        if (!sessionUser) return;
-        getMessagesUserToUser(sessionUser, otherUser).then(response => {
-          const mappedMessages = mapMessages(response);
-          setMessages(mappedMessages);
-        });
+        const response = await getMessagesUserToUser(sessionUser, otherUser);
+        const mappedMessages = mapMessages(response);
+        setMessages(mappedMessages);
       } catch (error) {
         console.error('Error fetching messages:', error);
-      } 
+      } finally {
+        setLoading(false);
+      }
     };
     fetchMessages();
-  }, [sessionUser]);
+  }, [sessionUser, otherUser]);
 
   // maps messages to GiftedChat format
   const mapMessages = (messages) => {
@@ -53,15 +54,15 @@ export default function ChatScreen({ route }) {
   };
 
   // on send: add message to the database and append it to the chat
-  const onSend = async (newMessages = []) => {
+  const onSend = useCallback(async (newMessages = []) => {
     const sentMessage = newMessages[0];
     setMessages((prevMessages) => GiftedChat.append(prevMessages, sentMessage));
     try {
-      addMessageToDatabase(sessionUser, otherUser, sentMessage.text);
+      await addMessageToDatabase(sessionUser, otherUser, sentMessage.text);
     } catch (error) {
       console.error('Error adding message to database:', error);
     }
-  };
+  }, [sessionUser, otherUser]);
 
   // function to render the chat in the correct way
   const renderBubble = (props) => {
@@ -75,6 +76,14 @@ export default function ChatScreen({ route }) {
       />
     );
   };
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#1E90FF" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -107,6 +116,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingBottom: 20,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   header: {
     width: '100%',
@@ -158,4 +172,5 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
 });
+
 
